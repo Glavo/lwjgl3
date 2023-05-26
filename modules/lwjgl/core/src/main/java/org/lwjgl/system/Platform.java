@@ -54,7 +54,9 @@ public enum Platform {
         X64(true),
         X86(false),
         ARM64(true),
-        ARM32(false);
+        ARM32(false),
+        RISCV64(true),
+        RISCV32(false);
 
         static final Architecture current;
 
@@ -64,9 +66,13 @@ public enum Platform {
             String  osArch  = System.getProperty("os.arch");
             boolean is64Bit = osArch.contains("64") || osArch.startsWith("armv8");
 
-            current = osArch.startsWith("arm") || osArch.startsWith("aarch64")
-                ? (is64Bit ? Architecture.ARM64 : Architecture.ARM32)
-                : (is64Bit ? Architecture.X64 : Architecture.X86);
+            if (osArch.startsWith("arm") || osArch.startsWith("aarch")) {
+                current = is64Bit ? Architecture.ARM64 : Architecture.ARM32;
+            } else if (osArch.startsWith("riscv")) {
+                current = is64Bit ? Architecture.RISCV64 : Architecture.RISCV32;
+            } else {
+                current = is64Bit ? Architecture.X64 : Architecture.X86;
+            }
         }
 
         Architecture(boolean is64Bit) {
