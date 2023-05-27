@@ -1521,6 +1521,10 @@
                 <get-release platform="linux" arch="arm32" file="libassimp.so.git"/>
                 <get-release platform="linux" arch="arm32" file="libdraco.so"/>
 
+                <get-release platform="linux" arch="riscv64" file="libassimp.so"/>
+                <get-release platform="linux" arch="riscv64" file="libassimp.so.git"/>
+                <get-release platform="linux" arch="riscv64" file="libdraco.so"/>
+
                 <get-release platform="macos" arch="x64" file="libassimp.dylib"/>
                 <get-release platform="macos" arch="x64" file="libassimp.dylib.git"/>
                 <get-release platform="macos" arch="x64" file="libdraco.dylib"/>
@@ -1684,11 +1688,11 @@
                 <get-release platform="linux" arch="arm32" file="libopenal.so"/>
                 <get-release platform="linux" arch="arm32" file="libopenal.so.git"/>
 
-                <get-release platform="macos" arch="x64" file="libopenal.dylib"/>
-                <get-release platform="macos" arch="x64" file="libopenal.dylib.git"/>
-
                 <get-release platform="linux" arch="riscv64" file="libopenal.so"/>
                 <get-release platform="linux" arch="riscv64" file="libopenal.so.git"/>
+
+                <get-release platform="macos" arch="x64" file="libopenal.dylib"/>
+                <get-release platform="macos" arch="x64" file="libopenal.dylib.git"/>
 
                 <get-release platform="macos" arch="arm64" file="libopenal.dylib"/>
                 <get-release platform="macos" arch="arm64" file="libopenal.dylib.git"/>
@@ -1745,6 +1749,9 @@
 
                 <get-release platform="linux" arch="arm32" file="libopenxr_loader.so"/>
                 <get-release platform="linux" arch="arm32" file="libopenxr_loader.so.git"/>
+
+                <get-release platform="linux" arch="riscv64" file="libopenxr_loader.so"/>
+                <get-release platform="linux" arch="riscv64" file="libopenxr_loader.so.git"/>
 
                 <get-release platform="windows" arch="x64" file="openxr-loader.dll"/>
                 <get-release platform="windows" arch="x64" file="openxr-loader.dll.git"/>
