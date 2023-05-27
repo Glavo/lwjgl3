@@ -48,7 +48,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     </condition>
 
     <!-- Normalize os.arch -->
-    <condition property="build.arch" value="x64"        unless:set="build.arch"><and><isset property="build.arch.x86_family"/>  <isfalse value="${is64Bit}"/></and></condition>
+    <condition property="build.arch" value="x64"        unless:set="build.arch"><and><isset property="build.arch.x86_family"/>  <istrue  value="${is64Bit}"/></and></condition>
     <condition property="build.arch" value="x86"        unless:set="build.arch"><and><isset property="build.arch.x86_family"/>  <isfalse value="${is64Bit}"/></and></condition>
     <condition property="build.arch" value="arm64"      unless:set="build.arch"><and><isset property="build.arch.arm"/>         <istrue  value="${is64Bit}"/></and></condition>
     <condition property="build.arch" value="arm32"      unless:set="build.arch"><and><isset property="build.arch.arm"/>         <isfalse value="${is64Bit}"/></and></condition>
