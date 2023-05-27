@@ -53,7 +53,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <condition property="build.arch" value="arm64"      unless:set="build.arch"><and><isset property="build.arch.arm"/>         <istrue  value="${is64Bit}"/></and></condition>
     <condition property="build.arch" value="arm32"      unless:set="build.arch"><and><isset property="build.arch.arm"/>         <isfalse value="${is64Bit}"/></and></condition>
     <condition property="build.arch" value="riscv64"    unless:set="build.arch"><and><isset property="build.arch.riscv"/>       <istrue  value="${is64Bit}"/></and></condition>
-    <condition property="build.arch" value="${os.arch}"><not><isset property="build.arch"/></not></condition>
+    <property      name="build.arch" value="${os.arch}" unless:set="build.arch"/>
 
     <fail message="Invalid or unsupported build architecture: ${build.arch}. Supported: x64, x86, arm64, arm32, riscv64">
         <condition><not><matches string="${build.arch}" pattern="^(x64|x86|arm64|arm32|riscv64)$"/></not></condition>
