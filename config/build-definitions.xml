@@ -365,7 +365,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
         <attribute name="artifact"/>
 
         <sequential>
-            <sequential if:true="${binding.@{module}}">
+            <sequential if:true="${binding.@{module}}" unless:set="build.offline">
                 <local name="dest"/>
                 <property name="dest" value="${lib.native}/${module.@{module}.path}"/>
                 <mkdir dir="${dest}"/>
