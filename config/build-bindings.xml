@@ -64,13 +64,7 @@ This script is included in /config/build-definitions.xml.
             <isset property="build.arch.arm"/>
         </and>
     </condition>
-    <condition property="binding.rpmalloc" value="true" else="false">
-        <or>
-            <isset property="build.arch.x86_family"/>
-            <isset property="build.arch.arm"/>
-            <isset property="build.arch.riscv64"/>
-        </or>
-    </condition>
+    <property name="binding.rpmalloc" value="true"/>
     <property name="binding.shaderc" value="true"/>
     <property name="binding.spvc" value="true"/>
     <condition property="binding.sse" value="true" else="false"><isset property="build.arch.x86_family"/></condition>
