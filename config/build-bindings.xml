@@ -18,6 +18,7 @@ This script is included in /config/build-definitions.xml.
     <condition property="binding.bgfx" value="true" else="false">
         <or>
             <isset property="build.arch.x86_family"/>
+            <isset property="build.arch.riscv64"/>
             <and>
                 <isset property="build.arch.arm"/>
                 <not><isset property="platform.windows"/></not>
@@ -67,6 +68,7 @@ This script is included in /config/build-definitions.xml.
         <or>
             <isset property="build.arch.x86_family"/>
             <isset property="build.arch.arm"/>
+            <isset property="build.arch.riscv64"/>
         </or>
     </condition>
     <property name="binding.shaderc" value="true"/>
