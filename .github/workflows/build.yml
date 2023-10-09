@@ -130,7 +130,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ARCH: [arm32, arm64]
+        ARCH: [arm32, arm64, riscv64]
         include:
           - ARCH: arm32
             CONTAINER: ubuntu:18.04
