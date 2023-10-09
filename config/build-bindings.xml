@@ -15,15 +15,11 @@ This script is included in /config/build-definitions.xml.
     <!-- // ========== BINDING FLAGS ======== // -->
 
     <property name="binding.assimp" value="true"/>
-    <condition property="binding.bgfx" value="true" else="false">
-        <or>
-            <isset property="build.arch.x86_family"/>
-            <isset property="build.arch.riscv64"/>
-            <and>
-                <isset property="build.arch.arm"/>
-                <not><isset property="platform.windows"/></not>
-            </and>
-        </or>
+    <condition property="binding.bgfx" value="false" else="true">
+        <and>
+            <isset property="platform.windows"/>
+            <isset property="build.arch.arm"/>
+        </and>
     </condition>
     <property name="binding.cuda" value="true"/>
     <property name="binding.egl" value="true"/>

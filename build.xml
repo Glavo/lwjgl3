@@ -1586,6 +1586,9 @@
                 <get-release platform="linux" arch="arm32" file="libbgfx.so"/>
                 <get-release platform="linux" arch="arm32" file="libbgfx.so.git"/>
 
+                <get-release platform="linux" arch="riscv64" file="libbgfx.so"/>
+                <get-release platform="linux" arch="riscv64" file="libbgfx.so.git"/>
+
                 <get-release platform="macos" arch="x64" file="libbgfx.dylib"/>
                 <get-release platform="macos" arch="x64" file="libbgfx.dylib.git"/>
 
