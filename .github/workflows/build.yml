@@ -126,22 +126,30 @@ jobs:
     needs: cache-kotlinc
     runs-on: ubuntu-latest
     container:
-      image: ubuntu:18.04
+      image: ${{matrix.CONTAINER}}
     strategy:
       fail-fast: false
       matrix:
         ARCH: [arm32, arm64]
         include:
           - ARCH: arm32
+            CONTAINER: ubuntu:18.04
             PACKAGES: gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf libc6-dev-armhf-cross
             CROSS_ARCH: armhf
             CROSS_PACKAGES: libgtk-3-dev:armhf libatk-bridge2.0-dev:armhf libgdk-pixbuf2.0-dev:armhf libglu-dev:armhf libgl1-mesa-glx:armhf libx11-dev:armhf libxt-dev:armhf libdbus-1-dev:armhf
             NATIVE_PARAMS: -Dgcc.libpath.opengl=/usr/lib/arm-linux-gnueabihf/mesa
           - ARCH: arm64
+            CONTAINER: ubuntu:18.04
             PACKAGES: gcc-aarch64-linux-gnu g++-aarch64-linux-gnu libc6-dev-arm64-cross
             CROSS_ARCH: arm64
             CROSS_PACKAGES: libgtk-3-dev:arm64 libatk-bridge2.0-dev:arm64 libgdk-pixbuf2.0-dev:arm64 libglu-dev:arm64 libgl1-mesa-glx:arm64 libx11-dev:arm64 libxt-dev:arm64 libdbus-1-dev:arm64
             NATIVE_PARAMS: -Dgcc.libpath.opengl=/usr/lib/aarch64-linux-gnu/mesa
+          - ARCH: riscv64
+            CONTAINER: ubuntu:20.04
+            PACKAGES: gcc-riscv64-linux-gnu g++-riscv64-linux-gnu libc6-dev-riscv64-cross
+            CROSS_ARCH: riscv64
+            CROSS_PACKAGES: libgtk-3-dev:riscv64 libatk-bridge2.0-dev:riscv64 libgdk-pixbuf2.0-dev:riscv64 libglu-dev:riscv64 libgl1-mesa-glx:riscv64 libx11-dev:riscv64 libxt-dev:riscv64 libdbus-1-dev:riscv64
+            NATIVE_PARAMS: -Dgcc.libpath.opengl=/usr/lib/riscv64-linux-gnu/mesa
     env:
       LWJGL_BUILD_ARCH: ${{matrix.ARCH}}
     steps:
@@ -153,6 +161,9 @@ jobs:
           apt-get -y update
           apt-get -y upgrade
           add-apt-repository -y ppa:git-core/ppa
+        name: Update apt repositories
+        if: ${{ matrix.CONTAINER == 'ubuntu:18.04' }}
+      - run: |
           apt-get -y update
           apt-get install -y git
       - name: Checkout repository
@@ -169,7 +180,7 @@ jobs:
         run: |
           sed -i 's/deb http/deb [arch=amd64,i386] http/' /etc/apt/sources.list
           grep "ubuntu.com/ubuntu" /etc/apt/sources.list | tee /etc/apt/sources.list.d/ports.list
-          sed -i 's/amd64,i386/armhf,arm64/' /etc/apt/sources.list.d/ports.list
+          sed -i 's/amd64,i386/${{matrix.CROSS_ARCH}}/' /etc/apt/sources.list.d/ports.list
           sed -i 's#http://.*/ubuntu#http://ports.ubuntu.com/ubuntu-ports#' /etc/apt/sources.list.d/ports.list
           dpkg --add-architecture ${{matrix.CROSS_ARCH}}
           apt-get clean
