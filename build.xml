@@ -1094,9 +1094,8 @@
                     <quiet>
                         <mkdir dir="${destination}"/>
                     </quiet>
-                    <!-- TODO: Use build.lwjgl.org -->
                     <get
-                        src="https://github.com/Glavo/lwjgl3-riscv64/raw/natives/${build.type}/${platform.@{platform}.remote}/@{arch}/@{file}"
+                        src="https://build.lwjgl.org/${build.type}/${platform.@{platform}.remote}/@{arch}/@{file}"
                         dest="${destination}"
                         usetimestamp="true"
                     />
