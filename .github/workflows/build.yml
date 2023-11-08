@@ -47,7 +47,7 @@ jobs:
         ARCH: [arm64, riscv64]
         include:
           - ARCH: arm64
-            CONTAINER: ubuntu:18.04
+            CONTAINER: ubuntu:20.04
             PACKAGES: gcc-aarch64-linux-gnu g++-aarch64-linux-gnu libc6-dev-arm64-cross
             CROSS_ARCH: arm64
             CROSS_PACKAGES: libgtk-3-dev:arm64 libatk-bridge2.0-dev:arm64 libgdk-pixbuf2.0-dev:arm64 libglu-dev:arm64 libgl1-mesa-glx:arm64 libx11-dev:arm64 libxt-dev:arm64 libdbus-1-dev:arm64
@@ -94,9 +94,6 @@ jobs:
           apt-get update || true
       - name: Install cross-compilation dependencies
         run: apt-get -yq -f --allow-unauthenticated --no-install-suggests --no-install-recommends install ${{matrix.CROSS_PACKAGES}} -o Dpkg::Options::="--force-overwrite"
-      - name: Fix dbus
-        run: cp /usr/lib/riscv64-linux-gnu/dbus-1.0/include/dbus/dbus-arch-deps.h /usr/include/dbus-1.0/dbus/
-        if: ${{ matrix.ARCH == 'riscv64' }}
       - name: Restore kotlinc output
         uses: actions/cache/restore@v3
         with:
