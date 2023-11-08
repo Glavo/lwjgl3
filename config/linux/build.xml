@@ -290,13 +290,11 @@
         <build module="nfd" suffix="_portal" simple="true" linker="g++" if:true="${binding.nfd}">
             <beforeCompile>
                 <local name="linux.triplet"/>
-                <condition property="linux.triplet" value="x86_64-linux-gnu"><not><isset property="build.arch.arm"/></not></condition>
+                <condition property="linux.triplet" value="x86_64-linux-gnu"><isset property="build.arch.x86_family"/></condition>
                 <condition property="linux.triplet" value="arm-linux-gnueabihf"><isset property="build.arch.arm32"/></condition>
                 <condition property="linux.triplet" value="aarch64-linux-gnu"><isset property="build.arch.arm64"/></condition>
                 <condition property="linux.triplet" value="riscv64-linux-gnu"><isset property="build.arch.riscv64"/></condition>
 
-
-                <echo message="-I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include -I/usr/lib/${linux.triplet}/dbus-1.0/include"></echo>
                 <compile lang="c++">
                     <arg line="-I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include -I/usr/lib/${linux.triplet}/dbus-1.0/include"/>
                     <arg value="-I${src.main.rel}/include"/>

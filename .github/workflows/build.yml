@@ -94,7 +94,6 @@ jobs:
           apt-get update || true
       - name: Install cross-compilation dependencies
         run: apt-get -yq -f --allow-unauthenticated --no-install-suggests --no-install-recommends install ${{matrix.CROSS_PACKAGES}} -o Dpkg::Options::="--force-overwrite"
-      - run: file /usr/lib/riscv64-linux-gnu/dbus-1.0/include/dbus/dbus-arch-deps.h
       - name: Restore kotlinc output
         uses: actions/cache/restore@v3
         with:
