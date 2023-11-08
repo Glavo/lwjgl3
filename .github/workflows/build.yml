@@ -2,8 +2,7 @@
 # No artifacts are uploaded, see LWJGL-CI/lwjgl3 for that.
 name: LWJGL Build
 
-on:
-  workflow_dispatch:
+on: [push]
 
 env:
   JAVA_HOME: jdk8
